@@ -43,12 +43,7 @@ class MoviesController extends Controller
         $genres = collect($genereArray)->mapWithKeys(function ($genre) {
             return [$genre['id'] => $genre['name']];
         });
-        return view('movie/index', compact('topMovies', 'genres'));
-    }
-
-    public function store(Request $request)
-    {
-        //
+        return view('movies/index', compact('topMovies', 'genres'));
     }
 
     public function show($movie)
@@ -67,21 +62,7 @@ class MoviesController extends Controller
         $genres = collect($genereArray)->mapWithKeys(function ($genre) {
             return [$genre['id'] => $genre['name']];
         });
-        return view('movie.show', compact('movie', 'genres'));
+        return view('movies.show', compact('movie', 'genres'));
     }
 
-    public function edit($movie)
-    {
-        //
-    }
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    public function destroy($movie)
-    {
-        //
-    }
 }

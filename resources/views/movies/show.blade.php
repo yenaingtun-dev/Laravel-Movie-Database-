@@ -37,14 +37,18 @@
                 {{-- show actors --}}
                 <div class="row row-cols-5 mb-5">
                     @foreach ($movie['credits']['cast'] as $cast)
-                        @if ($loop->index < 5)
+                        @if ($loop->index < 10)
                             <div class="col">
                                 <div class="col">
+                                    <a href="{{ route('actors.show', $cast['id']) }}">
                                     <img style="width: 200px; height: 300px"
                                         src="{{ 'https://image.tmdb.org/t/p/original' . $cast['profile_path'] }}"
                                         class="img-fluid rounded" alt="Skyscrapers" />
+                                    </a>
                                     <div class="mt-3">
-                                        <h4>{{ $cast['name'] }}</h4>
+                                        <a style="text-decoration: none; color: black" href="{{ route('actors.show', $cast['id']) }}">
+                                            <h4 style="text-decoration: none">{{ $cast['name'] }}</h4>
+                                        </a>
                                         <span>{{ $cast['character'] }}</span>
                                     </div>
                                 </div>
