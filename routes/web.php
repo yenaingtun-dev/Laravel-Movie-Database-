@@ -9,7 +9,9 @@ Auth::routes();
 
 Route::get('/', [MoviesController::class, 'index']);
 Route::resource('movie', MoviesController::class);
+
 Route::get('/topmovie', [MoviesController::class, 'topMovie'])->name('topmovie');
+Route::get('/topmovie/page/{page?}', [MoviesController::class, 'topMovie']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

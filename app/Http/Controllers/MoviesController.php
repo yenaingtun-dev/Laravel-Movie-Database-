@@ -17,32 +17,30 @@ class MoviesController extends Controller
             ->get('https://api.themoviedb.org/3/genre/movie/list')
             ->json()['genres'];
 
-        //dd($popularMovies);
-        //dd($genereArray);
-
         $genres = collect($genereArray)->mapWithKeys(function ($genre) {
             return [$genre['id'] => $genre['name']];
         });
+
         return view('index', compact('popularMovies', 'genres'));
     }
 
 
-    public function topMovie()
+    public function topMovie($page = 1)
     {
+        //abort_if($page > 500, 204);
+
         $topMovies = Http::withToken(config('services.tmdb.token'))
-            ->get('https://api.themoviedb.org/3/movie/top_rated')
+            ->get('https://api.themoviedb.org/3/movie/top_rated?page=' . $page)
             ->json()['results'];
-        //dd($topMovies);
+
         $genereArray = Http::withToken(config('services.tmdb.token'))
             ->get('https://api.themoviedb.org/3/genre/movie/list')
             ->json()['genres'];
 
-        //dd($popularMovies);
-        //dd($genereArray);
-
         $genres = collect($genereArray)->mapWithKeys(function ($genre) {
             return [$genre['id'] => $genre['name']];
         });
+
         return view('movies/index', compact('topMovies', 'genres'));
     }
 
@@ -51,17 +49,15 @@ class MoviesController extends Controller
         $movie = Http::withToken(config('services.tmdb.token'))
             ->get('https://api.themoviedb.org/3/movie/' . $movie . '?append_to_response=credits,videos,images')
             ->json();
-        //dd($movie);     
+
         $genereArray = Http::withToken(config('services.tmdb.token'))
             ->get('https://api.themoviedb.org/3/genre/movie/list')
             ->json()['genres'];
 
-        //dump($movie);
-        //dd($genereArray);
-
         $genres = collect($genereArray)->mapWithKeys(function ($genre) {
             return [$genre['id'] => $genre['name']];
         });
+
         return view('movies.show', compact('movie', 'genres'));
     }
 

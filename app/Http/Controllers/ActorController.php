@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
 
 class ActorController extends Controller
@@ -17,7 +18,7 @@ class ActorController extends Controller
             ->get('https://api.themoviedb.org/3/person/'.$id.'/combined_credits')
             ->json()['cast'];
 
-        dump($credits);
+        //dump($credits);
         
         return view('actors.show', compact('actor','credits'));
     }

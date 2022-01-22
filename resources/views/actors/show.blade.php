@@ -27,13 +27,13 @@
         @if ($loop->index < 10) 
         <div class="col">
           <div class="col">
-            <a href="#">
+            <a href="{{ route('movie.show', $credit['id']) }}">
               <img style="width: 200px; height: 300px"
                 src="{{ 'https://image.tmdb.org/t/p/original' . $credit['poster_path'] }}" class="img-fluid rounded"
-                alt="Skyscrapers" />
+                alt="{{ $credit['title'] }}" />
             </a>
             <div class="mt-3">
-              <a style="text-decoration: none; color: black" href="#">
+              <a style="text-decoration: none; color: black" href="{{ route('movie.show', $credit['id']) }}">
                 @if (isset($credit['title']))
                 <h4 style="text-decoration: none">{{ $credit['title'] }}</h4>
                 @else
