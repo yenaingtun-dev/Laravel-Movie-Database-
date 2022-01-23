@@ -27,8 +27,6 @@ class MoviesController extends Controller
 
     public function topMovie($page = 1)
     {
-        //abort_if($page > 500, 204);
-
         $topMovies = Http::withToken(config('services.tmdb.token'))
             ->get('https://api.themoviedb.org/3/movie/top_rated?page=' . $page)
             ->json()['results'];

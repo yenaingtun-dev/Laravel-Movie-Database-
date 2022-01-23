@@ -42,7 +42,7 @@
                                 <div class="col">
                                     <a href="{{ route('actors.show', $cast['id']) }}">
                                     <img style="width: 200px; height: 300px"
-                                        src="{{ 'https://image.tmdb.org/t/p/original' . $cast['profile_path'] }}"
+                                        src="{{ $cast['profile_path'] ? 'https://image.tmdb.org/t/p/original' . $cast['profile_path'] : 'https://via.placeholder.com/300x450' }}"
                                         class="img-fluid rounded" alt="Skyscrapers" />
                                     </a>
                                     <div class="mt-3">

@@ -20,34 +20,86 @@
 
         </div>
       </div>
-      {{-- show movies --}}
+      {{-- show movies & tv --}}
       <h4>Known For</h4>
       <div class="row row-cols-5 mb-5">
-        @foreach ($credits as $credit)
-        @if ($loop->index < 10) 
-        <div class="col">
+        @foreach (collect($credits)->sortByDesc('popularity')->take(10) as $credit)
+        @if ($loop->index < 10) <div class="col">
           <div class="col">
-            <a href="{{ route('movie.show', $credit['id']) }}">
-              <img style="width: 200px; height: 300px"
-                src="{{ 'https://image.tmdb.org/t/p/original' . $credit['poster_path'] }}" class="img-fluid rounded"
-                alt="{{ $credit['title'] }}" />
-            </a>
-            <div class="mt-3">
-              <a style="text-decoration: none; color: black" href="{{ route('movie.show', $credit['id']) }}">
-                @if (isset($credit['title']))
-                <h4 style="text-decoration: none">{{ $credit['title'] }}</h4>
-                @else
-                <h4>Untitled</h4>
+            @if ($credit['media_type'] === 'tv')
+            <a href="{{ route('tv.show', $credit['id']) }}">
+              @else
+              <a href="{{ route('movie.show', $credit['id']) }}">
                 @endif
+                <img style="width: 200px; height: 300px"
+                  src="{{ $credit['poster_path'] ? 'https://image.tmdb.org/t/p/original' . $credit['poster_path']  : 'https://via.placeholder.com/300x450' }}"
+                  class="img-fluid rounded" alt="#" />
               </a>
-            </div>
+              <div class="mt-3">
+                @if ($credit['media_type'] === 'tv')
+                <a style="text-decoration: none; color: black" href="{{ route('tv.show', $credit['id']) }}">
+                  @if (isset($credit['name']))
+                  <h4 style="text-decoration: none">{{ $credit['name'] }}</h4>
+                  @else
+                  <h4>Untitled Tv Show</h4>
+                  @endif
+                </a>
+                @else
+                <a style="text-decoration: none; color: black" href="{{ route('movie.show', $credit['id']) }}">
+                  @if (isset($credit['title']))
+                  <h4 style="text-decoration: none">{{ $credit['title'] }}</h4>
+                  @else
+                  <h4>Untitled Movie</h4>
+                  @endif
+                </a>
+                @endif
+              </div>
           </div>
       </div>
       @endif
       @endforeach
     </div>
+    {{-- actor credits --}}
     <hr class="mb-3">
-    <hr>
+    <div>
+      <ul class="list-group ">
+
+        @foreach ($credits as $credit)
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+          <div class="ms-2 me-auto">
+            <a style="text-decoration: none; color: black" 
+              href="{{ $credit['media_type'] === 'movie' ? route('movie.show', $credit['id']) : route('tv.show', $credit['id'])  }}">
+              <div class="fw-bold">
+                @if (isset($credit['title']))
+                {{ $credit['title']}}
+                @elseif (isset($credit['name']))
+                {{ $credit['name'] }}
+                @else
+                {{ 'none' }}
+                @endif
+                <span>
+                  @if (isset($credit['release_date']))
+                 ({{ \Carbon\Carbon::parse($credit['release_date'])->format('Y') }})
+                  @elseif (isset($credit['first_air_date']))
+                  ({{ \Carbon\Carbon::parse($credit['first_air_date'])->format('Y') }})
+                  @else
+                  {{ 'none' }}
+                  @endif
+                </span>
+              </div> <span class="fw-light">as a</span>
+              <span class="fw-bold">{{ $credit['character'] ? $credit['character'] : 'unknown'  }}</span>
+            </a>
+          </div>
+          @if ($credit['media_type'] === 'tv')
+          <span class="badge bg-info rounded-pill">
+            {{ $credit['episode_count'] }} episodes
+          </span>
+          @endif
+        </li>
+        @endforeach
+      </ul>
+    </div>
+    {{-- actor credits --}}
   </div>
 </div>
 </div>

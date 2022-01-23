@@ -40,7 +40,7 @@
                             <a href="{{ route('topmovie') }}" class="nav-link">Movies</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">TV Shows</a>
+                            <a href="{{ route('tv') }}" class="nav-link">TV Shows</a>
                         </li>
                     </ul>
 

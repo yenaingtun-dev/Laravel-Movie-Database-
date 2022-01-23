@@ -45,8 +45,6 @@
         var infScroll = new InfiniteScroll(elem, {
             path: '/topmovie/page/@{{#}}',
             append: '.movie',
-            //status: '.page-load-status',
-            // history: false,
         });
 </script>
 @endsection
