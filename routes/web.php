@@ -20,3 +20,7 @@ Route::get('/topmovie/page/{page?}', [MoviesController::class, 'topMovie']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/actors/{id}',[ActorController::class, 'show'])->name('actors.show');
+
+Route::get('/search', function(){
+  return view('search');
+})->name('search');

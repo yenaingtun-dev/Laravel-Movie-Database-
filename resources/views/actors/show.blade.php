@@ -64,7 +64,7 @@
     <div>
       <ul class="list-group ">
 
-        @foreach ($credits as $credit)
+        @foreach (collect($credits)->sortByDesc('release_date') as $credit)
         <li class="list-group-item d-flex justify-content-between align-items-start">
           <div class="ms-2 me-auto">
             <a style="text-decoration: none; color: black" 

@@ -17,7 +17,9 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <!-- Styles -->
+    @livewireStyles
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
@@ -43,9 +45,15 @@
                             <a href="{{ route('tv') }}" class="nav-link">TV Shows</a>
                         </li>
                     </ul>
+                    
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a href="{{ route('search') }}" class="nav-link"> 
+                                <i class="fas fa-search"></i>
+                            </a>
+                        </li>
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
@@ -88,6 +96,7 @@
             @yield('content')
         </main>
     </div>
+    @livewireScripts
     @yield('scripts')
 </body>
 
