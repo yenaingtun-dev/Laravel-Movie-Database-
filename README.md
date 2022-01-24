@@ -1,10 +1,12 @@
  # Laravel 8 MovieDatabase App with TMDB API 
  
  **Features:**   
-* Using APIs fetching 
-* Use laravel livewire components 
-* Inifity Scroll pagination 
-* Basic Bootstrap front-end  
+* Using APIs fetching (https://www.themoviedb.org/)
+* Use laravel livewire components (https://laravel-livewire.com/) 
+* Inifity Scroll pagination (https://infinite-scroll.com/)
+* Basic Bootstrap front-end (https://getbootstrap.com/) 
+
+
 
 *** 
 
