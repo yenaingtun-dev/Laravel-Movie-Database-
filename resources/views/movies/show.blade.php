@@ -25,7 +25,9 @@
                         <h4>Feature Crews</h4>
                         @foreach ($movie['credits']['crew'] as $crew)
                             @if ($crew['job'] == 'Director')
-                                <p>{{ $crew['job'] }} - {{ $crew['name'] }}</p>
+                                <p>{{ $crew['job'] }} -  
+                                    <a style="text-decoration: none; color: black;" href="{{ route('actors.show', $crew['id']) }}">{{ $crew['name'] }}</a>
+                                </p>
                             @endif
                         @endforeach
                         @if (count($movie['videos']['results']) > 0)

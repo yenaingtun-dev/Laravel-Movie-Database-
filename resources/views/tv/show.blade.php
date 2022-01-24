@@ -22,10 +22,13 @@
           </div> <br>
           <p>{{ $tv['overview'] }}</p> <br>
           <h4>Feature Crews</h4>
-          @foreach ($tv['credits']['crew'] as $crew)
-          @if ($crew['job'] == 'Director')
-          <p>{{ $crew['job'] }} - {{ $crew['name'] }}</p>
-          @endif
+          @foreach (collect($tv['created_by'])->take(5) as $crew)
+          <div>
+            <p class="fw-bold">CreatedBy -
+              <a style="text-decoration: none; color: black;" href="{{ route('actors.show', $crew['id']) }}"> {{
+                $crew['name'] }} </a>
+            </p>
+          </div>
           @endforeach
           @if (count($tv['videos']['results']) > 0)
           <a href="https://youtube.com/watch?v={{ $tv['videos']['results']['0']['key'] }}"

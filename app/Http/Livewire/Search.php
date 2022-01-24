@@ -19,7 +19,7 @@ class Search extends Component
                 ->json()['results'];
         }
 
-         return view('livewire.search', [
+        return view('livewire.search', [
             'searchResults' => collect($searchResults)->take(10),
         ]);
     }
